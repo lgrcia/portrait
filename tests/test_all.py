@@ -12,7 +12,7 @@ def test_coverage():
 
     P_max = 10
     periods = np.arange(0, P_max, 0.01)
-    _ = coverage(times, periods)
+    _ = coverage(times)(periods)
 
 
 def test_period_match():

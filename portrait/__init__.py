@@ -18,4 +18,4 @@ def get_version() -> str:
 
 version: str = get_version()
 
-from .main import coverage, period_match
+from portrait.core import coverage, period_match
