@@ -1,0 +1,23 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: portrait
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Lionel
+    family-names: Garcia
+    orcid: 'https://orcid.org/0000-0002-4296-2246'
+repository-code: 'https://github.com/lgrcia/portrait'
+url: 'https://portrait.readthedocs.io'
+abstract: >-
+  A Python package to compute and visualize observations
+  phase coverage
+keywords:
+  - astronomy
+  - exoplanets
+  - observations
+license: MIT
