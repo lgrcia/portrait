@@ -5,14 +5,11 @@
   <br>
   <p align="center">
     <a href="https://github.com/lgrcia/portrait">
-      <img src="https://img.shields.io/badge/github-lgrcia/portrait-blue.svg?style=flat" alt="github"/>
-    </a>
+      <img src="https://img.shields.io/badge/github-lgrcia/portrait-blue.svg?style=flat" alt="github"/></a>
     <a href="">
-      <img src="https://img.shields.io/badge/license-MIT-lightgray.svg?style=flat" alt="license"/>
-    </a>
+      <img src="https://img.shields.io/badge/license-MIT-lightgray.svg?style=flat" alt="license"/></a>
     <a href="https://portrait.readthedocs.io">
-      <img src="https://img.shields.io/badge/documentation-black.svg?style=flat" alt="documentation"/>
-    </a>
+      <img src="https://img.shields.io/badge/documentation-black.svg?style=flat" alt="documentation"/></a>
   </p>
 </p>
 
