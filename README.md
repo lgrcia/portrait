@@ -1,9 +1,5 @@
 # portrait
 
-<p align="center" style="margin-bottom:-50px">
-    <img src="docs/_static/logo@3x.png" width="200">
-</p>
-
 <p align="center">
   Observation metrics for periodic events
   <br>
