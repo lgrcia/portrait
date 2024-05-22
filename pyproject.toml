@@ -30,4 +30,5 @@ docs = [
   "black",
   "myst-nb",
   "sphinx-copybutton",
+  "matplotlib",
 ]
