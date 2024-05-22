@@ -74,7 +74,5 @@ nb_execution_mode = "cache"
 nb_execution_raise_on_error = True
 nb_execution_timeout = 60
 
-html_css_files = ["style.css"]
-
 autodoc_typehints = "signature"
 autoclass_content = "both"

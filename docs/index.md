@@ -18,8 +18,8 @@ acknowledgement
 :maxdepth: 0
 :caption: Tutorials
 
-ipynb/periodmatch
-ipynb/coverage
+periodmatch
+coverage
 ```
 
 ```{toctree}
