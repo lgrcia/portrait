@@ -29,12 +29,12 @@ The observation of a rotating object is often constrained by its visibility, lea
 
 # Statement of need
 
-`portrait` is a Python package designed to provide observation metrics of periodic events. In Astronomy, it has been used in the context of transiting exoplanets detections (e.g., `@Delrez2022`; `@Schanche2022`), to find out how much of an orbit with a given period $P$ has been covered by a set of observations. This is particularly important from the ground, where experimental constraints limit the possible times of observations, or to estimate the completeness of a transit survey.
+`portrait` is a Python package designed to provide observation metrics of periodic events. In Astronomy, it has been used in the context of transiting exoplanets detections (e.g., @Delrez2022; @Schanche2022), to find out how much of an orbit with a given period $P$ has been covered by a set of observations. This is particularly important from the ground, where experimental constraints limit the possible times of observations, or to estimate the completeness of a transit survey.
 
-At scale, `portrait` has been used to design the SPECULOOS transit survey, optimizing the observing strategy that maximizes the coverage of transiting exoplanets orbiting in the habitable zone of their star [`@Sebastian2021`]. The package is designed to be user-friendly, with a focus on simplicity and ease of use. It is highly optimized and hardware-accelerated thanks to JAX [`@jax2018github`], which allows for fast computation of the metrics on large datasets.
+At scale, `portrait` has been used to design the SPECULOOS transit survey, optimizing the observing strategy that maximizes the coverage of transiting exoplanets orbiting in the habitable zone of their star [@Sebastian2021]. The package is designed to be user-friendly, with a focus on simplicity and ease of use. It is highly optimized and hardware-accelerated thanks to JAX [@jax2018github], which allows for fast computation of the metrics on large datasets.
 
 
 ## Acknowledgements
-`portrait` dependencies include numpy [`@harris2020array`], jax and jaxlib [`@jax2018github`]
+`portrait` dependencies include numpy [@harris2020array], jax and jaxlib [@jax2018github]
 
 # References
