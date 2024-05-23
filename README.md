@@ -1,6 +1,10 @@
 # portrait
 
 <p align="center">
+    <img src="docs/_static/portrait.png" height="250">
+</p>
+
+<p align="center">
   Observation metrics for periodic events
   <br>
   <p align="center">
