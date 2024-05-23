@@ -1,26 +1,27 @@
 import jax
 import jax.numpy as jnp
 import numpy as np
+from functools import partial
 
 
-def coverage(time, gap=0.1, precision=1e-3):
-    """Returns the phase coverage for given period(s)
+def phase_coverage(time, phases, gap=0.1):
+    """Returns the coverage of given phases, in number of times observed
 
     Parameters
     ----------
     times : list of arrays
         an array of observed times
+    phases : array
+        a grid of phases to compute the coverage for
     gap : float, optional
         minimum gap between observations to be considered an independent
-        segment, by default 0.5
-    precision : float, optional
-        precision of the phase coverage returned, by default 1e-3
+        segment, by default 0.1
 
     Returns
     -------
     function
-        a function that computes the phase coverage for a given period,
-        i.e. with signature :code:`fun(float or array) -> float or array`
+        a function that computes the phases coverage for a given period,
+        i.e. with signature :code:`fun(float) -> array`
     """
     # we pre-compute segments_times: the pairs of (time_min, time_max) of each segment
     diff_time = jnp.diff(time)
@@ -32,21 +33,21 @@ def coverage(time, gap=0.1, precision=1e-3):
     segments_times = cuts_time.reshape(-1, 2)
 
     # a grid of well sampled phases
-    sampled = jnp.arange(0.0, 1.0, precision)
+    sampled = phases.copy()
 
     @jax.jit
     def fun(period):
-        """Compute the phase coverage for a given period
+        """Returns the coverage of given phases, in number of times observed
 
         Parameters:
         ----------
         period: float or array
-            the period(s) to compute the phase coverage for
+            the period  to compute the coverage for
 
         Returns
         -------
-        float or array
-            the phase coverage for the given period(s)
+        array
+            phases coverage for the given period
         """
 
         raw_segments_phases = ((segments_times + 0.5 * period) % period) / period
@@ -96,7 +97,52 @@ def coverage(time, gap=0.1, precision=1e-3):
             & (sampled[:, None] <= clean_segments_phases[:, 1])
         ).astype(float)
 
-        return jnp.mean(jnp.max(overlap, 1))
+        return jnp.sum(overlap, 1)
+
+    return fun
+
+
+def coverage(time, gap=0.1, precision=1e-3, n=1):
+    """Returns the mean phase coverage for given period(s)
+
+    Parameters
+    ----------
+    times : list of arrays
+        an array of observed times
+    gap : float, optional
+        minimum gap between observations to be considered an independent
+        segment, by default 0.5
+    precision : float, optional
+        precision of the phase coverage returned, by default 1e-3
+
+    Returns
+    -------
+    function
+        a function that computes the overall phase coverage for a given period,
+        i.e. with signature :code:`fun(float or array) -> float or array`
+    """
+
+    phases = jnp.arange(0, 1, precision)
+    overlap_function = phase_coverage(time, phases, gap=gap)
+
+    jax.jit
+
+    def fun(period):
+        """Compute the phase coverage for a given period
+
+        Parameters:
+        ----------
+        period: float or array
+            the period(s) to compute the phase coverage for
+
+        Returns
+        -------
+        float or array
+            the phase coverage for the given period(s)
+        """
+        overlap = overlap_function(period)
+        observed = overlap >= n
+        return jnp.mean(observed)
 
     return jnp.vectorize(fun)
 

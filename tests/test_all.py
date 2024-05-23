@@ -15,6 +15,16 @@ def test_coverage():
     _ = coverage(times)(periods)
 
 
+def test_coverage_half():
+    times = np.linspace(0, 10, 1000)
+    np.testing.assert_allclose(coverage(times)(20), 0.5, atol=0.1)
+
+
+def test_coverage_half_doubled():
+    times = np.hstack([np.linspace(0, 10, 1000), np.linspace(20, 30, 2000)])
+    np.testing.assert_allclose(coverage(times)(20), 0.5, atol=0.1)
+
+
 def test_period_match():
     expected = 1.234
     np.random.seed(42)
