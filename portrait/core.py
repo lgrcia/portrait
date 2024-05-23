@@ -122,11 +122,10 @@ def coverage(time, gap=0.1, precision=1e-3, n=1):
         i.e. with signature :code:`fun(float or array) -> float or array`
     """
 
-    phases = jnp.arange(0, 1, precision)
+    phases = jnp.arange(0.0, 1.0, precision)
     overlap_function = phase_coverage(time, phases, gap=gap)
 
-    jax.jit
-
+    @jax.jit
     def fun(period):
         """Compute the phase coverage for a given period
 

@@ -6,3 +6,5 @@ API
 .. autofunction:: coverage
 
 .. autofunction:: period_match
+
+.. autofunction:: phase_coverage
