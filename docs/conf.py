@@ -10,6 +10,7 @@ project = "portrait"
 copyright = "2023, Lionel Garcia"
 author = "Lionel Garcia"
 release = "0.0.1"
+html_logo = "_static/portrait.png"
 
 # -- General configuration ---------------------------------------------------
 
