@@ -1,7 +1,7 @@
 # portrait
 
 <p align="center">
-    <img src="docs/_static/portrait.png" height="250">
+    <img src="docs/_static/portrait.png" height="180">
 </p>
 
 <p align="center">
