@@ -59,17 +59,22 @@ def phase_coverage(time, phases, gap=0.1):
         # we allocate segments_phases_2 for the extra split, as JAX requires fixed size arrays
         #
         # cases:
-        # - ||   0-----1 || -> |-----|
+        # - |   0-----1 |
         #
-        # - ||-----1  0--|| -> |-----|, |--|
+        # - |        0--+
+        #   +-----1     |
         #
-        # - ||--1
-        #    +-----------+
-        #           0----|| -> |--|, |-----------|, |----|
+        # - |--1
+        #    +----------+
+        #           0---|
         #
-        # - ||  0--------+
-        #    +-----------+
-        #    +-----1    || -> |--------|, |-----------|, |----|
+        # - |  0--------+
+        #   +-----------+
+        #   +------1    |
+        #
+        # | : bounds of full phase segment
+        # 0, 1 : start, end of the actual segment
+        # + : wrap around the phase 1.0
 
         n = raw_segments_phases.shape[0]
 
