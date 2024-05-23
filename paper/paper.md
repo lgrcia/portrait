@@ -18,7 +18,7 @@ affiliations:
  - name: Center for Computational Astrophysics, Flatiron Institute, New York, NY, USA
    index: 1
  - name: LESIA, Observatoire de Paris, CNRS, Université Paris Diderot, Université Pierre et Marie Curie, Meudon, France
-    index: 2
+   index: 2
 date: 22 May 2024
 bibliography: paper.bib
 ---
