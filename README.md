@@ -16,6 +16,6 @@
 A Python package to compute and visualize observation metrics for periodic events.
 
 In Astronomy, *portrait* is useful to answer the following questions:
-- How much of an orbit with period $P$ has been observed given certain observation times? ([tutorial](docs/coverage.ipynb))
-- What period $P$ matches with this list of events? ([tutorial](docs/periodmatch.ipynb))
+- How much of an orbit with period $P$ has been observed given certain observation times? ([tutorial](./docs/coverage.ipynb))
+- What period $P$ matches with this list of events? ([tutorial](./docs/periodmatch.ipynb))
 - How a certain target must be observed to cover all orbits with periods lower than $P$ days? 
