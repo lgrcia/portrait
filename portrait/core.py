@@ -34,6 +34,7 @@ def phase_coverage(time, phases, gap=0.1):
 
     # a grid of well sampled phases
     sampled = phases.copy()
+    complete = jnp.ones_like(phases)
 
     @jax.jit
     def fun(period):
@@ -56,48 +57,50 @@ def phase_coverage(time, phases, gap=0.1):
         # (0.6, 0.5) which corresponds to a segment that wraps around
         # the phase 1.0. We need to fix this and split it in (0.0, 0.5) and (0.6, 1.0)
         # we allocate segments_phases_2 for the extra split, as JAX requires fixed size arrays
+        #
+        # cases:
+        # - ||   0-----1 || -> |-----|
+        #
+        # - ||-----1  0--|| -> |-----|, |--|
+        #
+        # - ||--1
+        #    +-----------+
+        #           0----|| -> |--|, |-----------|, |----|
+        #
+        # - ||  0--------+
+        #    +-----------+
+        #    +-----1    || -> |--------|, |-----------|, |----|
 
         n = raw_segments_phases.shape[0]
 
+        full = jnp.floor((segments_times[:, 1] - segments_times[:, 0]) / period)
         is_positive = jnp.array(raw_segments_phases[:, 1] >= raw_segments_phases[:, 0])
+        is_full = full > 0
+
+        condition = jnp.logical_and(is_positive, jnp.logical_not(is_full))
 
         segments_phases_1 = jnp.where(
-            is_positive,
+            condition,
             raw_segments_phases.T,
             jnp.vstack([jnp.zeros(n), raw_segments_phases[:, 1]]),
         ).T
 
         segments_phases_2 = jnp.where(
-            is_positive,
+            condition,
             jnp.zeros_like(raw_segments_phases).T,
             jnp.vstack([raw_segments_phases[:, 0], jnp.ones(n)]),
         ).T
 
-        # if the phase covers the whole period, we need to add a segment of full phase,
-        # i.e. (0.0, 1.0), because the bounds are meaningless
-
-        is_complete = jnp.any(
-            jnp.array(segments_times[:, 1] - segments_times[:, 0] >= period)
-        )
-
-        segments_complete = jnp.where(
-            is_complete,
-            jnp.array([0.0, 1.0]),
-            jnp.array([0.0, 0.0]),
-        ).T
-
         # we now have clean segments from which to compute the overlap
         # on the grid of sampled phases
-        clean_segments_phases = jnp.vstack(
-            [segments_phases_1, segments_phases_2, segments_complete]
-        )
+        clean_segments_phases = jnp.vstack([segments_phases_1, segments_phases_2])
 
         overlap = jnp.array(
             (sampled[:, None] >= clean_segments_phases[:, 0])
             & (sampled[:, None] <= clean_segments_phases[:, 1])
         ).astype(float)
 
-        return jnp.sum(overlap, 1)
+        return jnp.sum(overlap, 1) + complete * jnp.sum(full)
 
     return fun
 
