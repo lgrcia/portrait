@@ -11,6 +11,7 @@ copyright = "2023, Lionel Garcia"
 author = "Lionel Garcia"
 release = "0.0.1"
 html_logo = "_static/portrait.png"
+html_favicon = "_static/icon.png"
 
 # -- General configuration ---------------------------------------------------
 
