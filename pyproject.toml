@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "portrait"
-version = "0.0.4-beta"
+version = "0.0.5-beta"
 license = "MIT"
 requires-python = ">=3.8"
 authors = [{ name = "Lionel Garcia" }]
